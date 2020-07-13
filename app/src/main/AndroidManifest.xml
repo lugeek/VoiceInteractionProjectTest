@@ -1,0 +1,88 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.lugeek.voiceinteractionprojecttest">
+
+<!--    <uses-sdk android:minSdkVersion="28" android:targetSdkVersion="29" />-->
+
+    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.READ_LOGS"
+        tools:ignore="ProtectedPermissions" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="测试voiceinteraction"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name="com.android.test.voiceinteraction.VoiceInteractionMain" android:label="Voice Interaction"
+            android:theme="@android:style/Theme.Material"
+            tools:targetApi="lollipop">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.android.test.voiceinteraction.AssistProxyActivity"
+            android:label="Test Assist Proxy"
+            android:theme="@android:style/Theme.NoDisplay"
+            android:excludeFromRecents="true"
+            android:noHistory="true"
+            android:taskAffinity="">
+            <intent-filter>
+                <action android:name="android.intent.action.ASSIST" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.android.test.voiceinteraction.SettingsActivity"
+            android:label="Voice Interaction Settings">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <service android:name="com.android.test.voiceinteraction.MainInteractionService"
+            android:label="Test Voice Interaction Service"
+            android:permission="android.permission.BIND_VOICE_INTERACTION"
+            android:process=":interactor">
+            <meta-data android:name="android.voice_interaction"
+                android:resource="@xml/interaction_service" />
+            <intent-filter>
+                <action android:name="android.service.voice.VoiceInteractionService" />
+            </intent-filter>
+        </service>
+        <service android:name="com.android.test.voiceinteraction.MainInteractionSessionService"
+            android:permission="android.permission.BIND_VOICE_INTERACTION"
+            android:process=":session">
+        </service>
+        <service android:name="com.android.test.voiceinteraction.MainRecognitionService"
+            android:label="Test Voice Interaction Service">
+            <intent-filter>
+                <action android:name="android.speech.RecognitionService" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="android.speech" android:resource="@xml/recognition_service" />
+        </service>
+        <activity android:name="com.android.test.voiceinteraction.TestInteractionActivity" android:label="Voice Interaction Target"
+            android:theme="@android:style/Theme.Material.Light"
+            tools:targetApi="lollipop">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.VOICE" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.android.test.voiceinteraction.StartVoiceInteractionActivity" android:label="In-Activity Voice"
+            android:theme="@android:style/Theme.Material.Light"
+            tools:targetApi="lollipop">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
